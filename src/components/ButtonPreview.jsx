@@ -8,15 +8,25 @@ function ButtonPreview({ settings }) {
     backgroundColor: settings.buttonBackgroundColor || '#0066ff',
     color: settings.buttonTextColor || '#ffffff',
     fontSize: `${settings.buttonFontSize || 16}px`,
-    border: settings.buttonBorder || 'none',
+    border: 'none',
     cursor: 'pointer',
-    padding: '0 20px',
     fontWeight: '500',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.3s ease',
+    fontFamily: settings.fontFamily || 'Arial',
   };
 
   return (
-    <button style={buttonStyle}>
+    <button 
+      style={buttonStyle}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = settings.buttonHoverBackground || '#0052cc';
+        e.currentTarget.style.transform = 'translateY(-2px)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = settings.buttonBackgroundColor || '#0066ff';
+        e.currentTarget.style.transform = 'translateY(0)';
+      }}
+    >
       {settings.buttonText || "Learn More"}
     </button>
   );

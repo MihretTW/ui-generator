@@ -14,9 +14,32 @@ function CardContainer({ settings, children }) {
     gap: '20px',
     alignItems: 'center',
     textAlign: 'center',
+    transition: 'all 0.3s ease',
+    fontFamily: settings.fontFamily || 'Arial',
+    cursor: 'default',
   };
 
-  return <div style={style}>{children}</div>;
+  const hoverStyle = {
+    backgroundColor: settings.cardHoverBackground || '#f8f9ff',
+    transform: `scale(${settings.cardHoverScale / 100 || 1.05})`,
+    boxShadow: `0 20px ${parseInt(settings.cardShadow || 20) + 10}px ${settings.cardShadowColor || '#000000'}44`,
+  };
+
+  return (
+    <div 
+      style={style}
+      onMouseEnter={(e) => {
+        Object.assign(e.currentTarget.style, hoverStyle);
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = style.backgroundColor;
+        e.currentTarget.style.transform = 'scale(1)';
+        e.currentTarget.style.boxShadow = style.boxShadow;
+      }}
+    >
+      {children}
+    </div>
+  );
 }
 
 export default CardContainer;

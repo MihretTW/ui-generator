@@ -82,6 +82,29 @@ function CardControls({ settings, setSettings }) {
         />
       </div>
 
+      <h3>✨ Hover Effects</h3>
+
+      <div>
+        <label>Card Hover Scale (%)</label>
+        <input 
+          type="range" 
+          min="100" 
+          max="110" 
+          value={settings.cardHoverScale || 105} 
+          onChange={e => handleChange('cardHoverScale', e.target.value)} 
+        />
+        <span>{settings.cardHoverScale || 105}%</span>
+      </div>
+
+      <div>
+        <label>Card Hover Background</label>
+        <input 
+          type="color" 
+          value={settings.cardHoverBackground || '#f8f9ff'} 
+          onChange={e => handleChange('cardHoverBackground', e.target.value)} 
+        />
+      </div>
+
       <hr />
 
       <h3>📝 Content Settings</h3>
@@ -103,6 +126,43 @@ function CardControls({ settings, setSettings }) {
           onChange={(e) => handleChange('description', e.target.value)}
           placeholder="This is an amazing card..."
           rows={3}
+        />
+      </div>
+
+<hr />
+      <h3>🔤 Typography</h3>
+
+      <div>
+        <label>Font Family</label>
+        <select 
+          value={settings.fontFamily || 'Arial'} 
+          onChange={e => handleChange('fontFamily', e.target.value)}
+          style={{ width: '100%', padding: '8px' }}
+        >
+          <option value="Arial">Arial</option>
+          <option value="Helvetica">Helvetica</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Roboto">Roboto</option>
+          <option value="Inter">Inter (Modern)</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Title Font Size (px)</label>
+        <input 
+          type="number" 
+          value={settings.titleFontSize || 28} 
+          onChange={e => handleChange('titleFontSize', e.target.value)} 
+        />
+      </div>
+
+      <div>
+        <label>Description Font Size (px)</label>
+        <input 
+          type="number" 
+          value={settings.descriptionFontSize || 16} 
+          onChange={e => handleChange('descriptionFontSize', e.target.value)} 
         />
       </div>
 
@@ -145,6 +205,15 @@ function CardControls({ settings, setSettings }) {
           max="30" 
           value={settings.buttonBorderRadius || 8} 
           onChange={e => handleChange('buttonBorderRadius', e.target.value)} 
+        />
+      </div>
+
+      <div>
+        <label>Button Hover Background</label>
+        <input 
+          type="color" 
+          value={settings.buttonHoverBackground || '#0052cc'} 
+          onChange={e => handleChange('buttonHoverBackground', e.target.value)} 
         />
       </div>
     </div>
