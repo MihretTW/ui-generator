@@ -44,9 +44,12 @@ function CardBuilder() {
         padding: '40px'
       }}>
         <CardContainer settings={settings}>
-          <TextElement type="h2" settings={{ text: settings.title, color: settings.cardTextColor }} />
-          <TextElement type="p" settings={{ text: settings.description, color: settings.cardTextColor }} />
-          <ButtonPreview settings={settings} />
+          <TextElement 
+            type="h2" 
+            settings={settings}     
+          />
+          <TextElement type="p" settings={settings}     
+          /><ButtonPreview settings={settings} />
         </CardContainer>
       </div>
 
