@@ -1,5 +1,7 @@
 import {usestate} from "react"
 import cardPreview from "./components/CardPreview";
+import cardControls from "./components/CardControls";
+
 
 function App() {
 
