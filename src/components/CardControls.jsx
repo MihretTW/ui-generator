@@ -9,13 +9,16 @@ function CardControls({ settings, setSettings }) {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "20px" }}>
+      
+      <h3>🎨 Card Settings</h3>
+
       <div>
         <label>Width (px)</label>
         <input
           type="number"
-          value={settings.width || ''}
-          onChange={(e) => handleChange('width', e.target.value)}
+          value={settings.cardWidth || 380}
+          onChange={(e) => handleChange('cardWidth', e.target.value)}
           style={{ width: '100%' }}
         />
       </div>
@@ -24,18 +27,9 @@ function CardControls({ settings, setSettings }) {
         <label>Height (px)</label>
         <input
           type="number"
-          value={settings.height || ''}
-          onChange={(e) => handleChange('height', e.target.value)}
+          value={settings.cardHeight || 320}
+          onChange={(e) => handleChange('cardHeight', e.target.value)}
           style={{ width: '100%' }}
-        />
-      </div>
-
-      <div>
-        <label>Text Color</label>
-        <input
-          type="color"
-          value={settings.color || '#000000'}
-          onChange={(e) => handleChange('color', e.target.value)}
         />
       </div>
 
@@ -43,41 +37,76 @@ function CardControls({ settings, setSettings }) {
         <label>Background Color</label>
         <input
           type="color"
-          value={settings.background || '#ffffff'}
-          onChange={(e) => handleChange('background', e.target.value)}
+          value={settings.cardBackground || '#ffffff'}
+          onChange={(e) => handleChange('cardBackground', e.target.value)}
         />
       </div>
 
       <div>
-        <label>Border Radius: {settings.borderRadius}</label>
+        <label>Text Color</label>
+        <input
+          type="color"
+          value={settings.cardTextColor || '#333333'}
+          onChange={(e) => handleChange('cardTextColor', e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label>Border Radius: {settings.cardBorderRadius || 16}px</label>
         <input
           type="range"
           min="0"
           max="50"
-          value={parseInt(settings.borderRadius) || 0}
-          onChange={(e) => handleChange('borderRadius', e.target.value + 'px')}
+          value={settings.cardBorderRadius || 16}
+          onChange={(e) => handleChange('cardBorderRadius', e.target.value)}
         />
       </div>
 
       <div>
-  <label>Shadow Size: {settings.shadow || '0px'}</label>
-  <input
-    type="range"
-    min="0"
-    max="50"
-    value={parseInt(settings.shadow) || 0}
-    onChange={(e) => handleChange('shadow', e.target.value + 'px')}
-  />
-</div>
+        <label>Shadow Size: {settings.cardShadow || 20}px</label>
+        <input
+          type="range"
+          min="0"
+          max="50"
+          value={settings.cardShadow || 20}
+          onChange={(e) => handleChange('cardShadow', e.target.value)}
+        />
+      </div>
 
-<div>
-  <label>Shadow Color</label>
-  <input
-    type="color"
-    value={settings.shadowColor || '#000000'}
-    onChange={(e) => handleChange('shadowColor', e.target.value)}
-  />
-</div>
+      <div>
+        <label>Shadow Color</label>
+        <input
+          type="color"
+          value={settings.cardShadowColor || '#000000'}
+          onChange={(e) => handleChange('cardShadowColor', e.target.value)}
+        />
+      </div>
+
+      <hr />
+
+      <h3>📝 Content Settings</h3>
+
+      <div>
+        <label>Title Text</label>
+        <input
+          type="text"
+          value={settings.title || ''}
+          onChange={(e) => handleChange('title', e.target.value)}
+          placeholder="Beautiful Card"
+        />
+      </div>
+
+      <div>
+        <label>Description Text</label>
+        <textarea
+          value={settings.description || ''}
+          onChange={(e) => handleChange('description', e.target.value)}
+          placeholder="This is an amazing card..."
+          rows={3}
+        />
+      </div>
+
+      <hr />
 
       <h3>🔘 Button Settings</h3>
 
@@ -87,16 +116,6 @@ function CardControls({ settings, setSettings }) {
           type="text" 
           value={settings.buttonText || ''} 
           onChange={e => handleChange('buttonText', e.target.value)} 
-          placeholder="Learn More"
-        />
-      </div>
-
-      <div>
-        <label>Button Width (px)</label>
-        <input 
-          type="number" 
-          value={settings.buttonWidth || 160} 
-          onChange={e => handleChange('buttonWidth', e.target.value)} 
         />
       </div>
 
@@ -133,4 +152,3 @@ function CardControls({ settings, setSettings }) {
 }
 
 export default CardControls;
-

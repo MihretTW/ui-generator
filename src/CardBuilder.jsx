@@ -15,11 +15,9 @@ function CardBuilder() {
     cardShadowColor: '#000000',
     cardPadding: 32,
 
-    // Content
     title: "Beautiful Card",
     description: "This is an amazing card built with our generator.",
 
-    // Button
     buttonText: "Learn More",
     buttonWidth: 160,
     buttonHeight: 48,
@@ -31,12 +29,12 @@ function CardBuilder() {
   return (
     <div style={{ display: 'flex', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
       
-      {/* Left - Controls */}
+      {/* Controls */}
       <div style={{ width: '340px', overflowY: 'auto', borderRight: '1px solid #ddd', background: '#fafafa' }}>
         <CardControls settings={settings} setSettings={setSettings} />
       </div>
 
-      {/* Center - LIVE PREVIEW */}
+      {/* LIVE PREVIEW */}
       <div style={{ 
         flex: 1, 
         display: 'flex', 
@@ -46,28 +44,18 @@ function CardBuilder() {
         padding: '40px'
       }}>
         <CardContainer settings={settings}>
-          <TextElement 
-            type="h2" 
-            settings={{ text: settings.title, color: settings.cardTextColor }} 
-          />
-          <TextElement 
-            type="p" 
-            settings={{ text: settings.description, color: settings.cardTextColor }} 
-          />
+          <TextElement type="h2" settings={{ text: settings.title, color: settings.cardTextColor }} />
+          <TextElement type="p" settings={{ text: settings.description, color: settings.cardTextColor }} />
           <ButtonPreview settings={settings} />
         </CardContainer>
       </div>
 
       {/* Right Panel */}
-      <div style={{ 
-        width: '380px', 
-        borderLeft: '1px solid #ddd', 
-        padding: '20px', 
-        background: '#fafafa',
-        overflowY: 'auto'
-      }}>
-        <h3>Live Preview</h3>
-        <p>The card in the center updates in real-time.</p>
+      <div style={{ width: '380px', borderLeft: '1px solid #ddd', padding: '20px', background: '#fafafa' }}>
+        <h3>Debug Info</h3>
+        <pre style={{ fontSize: '12px', background: '#fff', padding: '10px' }}>
+          {JSON.stringify(settings, null, 2)}
+        </pre>
       </div>
     </div>
   );
