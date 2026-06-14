@@ -76,10 +76,7 @@ function CardBuilder() {
         background: '#fafafa',
         boxSizing: 'border-box'
       }}>
-        <h3>📋 Generated Code (Coming Soon)</h3>
-        <p style={{ color: '#666', marginBottom: '16px' }}>
-          The code generator will appear here.
-        </p>
+       
 
         <h4>Current Settings (Debug)</h4>
         <pre style={{
