@@ -27,39 +27,74 @@ function CardBuilder() {
   });
 
   return (
-    <div style={{ display: 'flex', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
-      
-      {/* Controls */}
-      <div style={{ width: '340px', overflowY: 'auto', borderRight: '1px solid #ddd', background: '#fafafa' }}>
+    <div style={{
+      display: 'flex',
+      height: '100vh',
+      width: '100%',
+      overflow: 'hidden',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+
+      {/* Left - Controls */}
+      <div style={{
+        width: '340px',
+        minWidth: '300px',
+        overflowY: 'auto',
+        borderRight: '1px solid #ddd',
+        background: '#fafafa',
+        boxSizing: 'border-box'
+      }}>
         <CardControls settings={settings} setSettings={setSettings} />
       </div>
 
-      {/* LIVE PREVIEW */}
-      <div style={{ 
-        flex: 1, 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
+      {/* Center - LIVE PREVIEW */}
+      <div style={{
+        flex: 1,
+        minWidth: '400px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         background: '#f0f2f5',
-        padding: '40px'
+        padding: '40px',
+        overflow: 'auto',
+        boxSizing: 'border-box'
       }}>
         <CardContainer settings={settings}>
-          <TextElement 
-            type="h2" 
-            settings={settings}     
-          />
-          <TextElement type="p" settings={settings}     
-          /><ButtonPreview settings={settings} />
+          <TextElement type="h2" settings={settings} />
+          <TextElement type="p" settings={settings} />
+          <ButtonPreview settings={settings} />
         </CardContainer>
       </div>
 
-      {/* Right Panel */}
-      <div style={{ width: '380px', borderLeft: '1px solid #ddd', padding: '20px', background: '#fafafa' }}>
-        <h3>Debug Info</h3>
-        <pre style={{ fontSize: '12px', background: '#fff', padding: '10px' }}>
+      {/* Right - Code / Debug Panel */}
+      <div style={{
+        width: '380px',
+        minWidth: '320px',
+        overflowY: 'auto',
+        borderLeft: '1px solid #ddd',
+        padding: '20px',
+        background: '#fafafa',
+        boxSizing: 'border-box'
+      }}>
+        <h3>📋 Generated Code (Coming Soon)</h3>
+        <p style={{ color: '#666', marginBottom: '16px' }}>
+          The code generator will appear here.
+        </p>
+
+        <h4>Current Settings (Debug)</h4>
+        <pre style={{
+          fontSize: '12px',
+          background: '#fff',
+          padding: '12px',
+          borderRadius: '6px',
+          border: '1px solid #eee',
+          maxHeight: '70vh',
+          overflow: 'auto'
+        }}>
           {JSON.stringify(settings, null, 2)}
         </pre>
       </div>
+
     </div>
   );
 }
