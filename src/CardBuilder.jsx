@@ -29,9 +29,9 @@ function CardBuilder() {
     buttonBorderRadius: 8,
   });
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
+  const [isTablet, setIsTablet] = useState(typeof window !== 'undefined' ? (window.innerWidth > 768 && window.innerWidth <= 1024) : false);
 
   // Handle responsive behavior
   useEffect(() => {
@@ -192,12 +192,14 @@ function CardBuilder() {
   const handleSettingsUpdate = (newSettings) => {
     setSettings(newSettings);
     // Optional: Save to localStorage for persistence
-    localStorage.setItem('cardBuilderSettings', JSON.stringify(newSettings));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cardBuilderSettings', JSON.stringify(newSettings));
+    }
   };
 
   // Load saved settings on mount
   useEffect(() => {
-    const savedSettings = localStorage.getItem('cardBuilderSettings');
+    const savedSettings = typeof window !== 'undefined' ? localStorage.getItem('cardBuilderSettings') : null;
     if (savedSettings) {
       try {
         const parsed = JSON.parse(savedSettings);
