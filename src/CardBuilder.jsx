@@ -35,10 +35,8 @@ function CardBuilder() {
 
   // Update document title and meta description
   useEffect(() => {
-    // Set website title
     document.title = "🎨 Card Builder Pro - Create Beautiful Cards Instantly";
     
-    // Create or update meta description
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -47,7 +45,6 @@ function CardBuilder() {
     }
     metaDescription.content = "Design and customize beautiful cards in real-time with our interactive card builder. Live preview, responsive design, and easy-to-use controls.";
     
-    // Add viewport meta if not exists (for better mobile responsiveness)
     let viewport = document.querySelector('meta[name="viewport"]');
     if (!viewport) {
       viewport = document.createElement('meta');
@@ -90,58 +87,70 @@ function CardBuilder() {
           flexDirection: 'column',
           height: '100vh',
           width: '100%',
-          overflow: 'auto',
+          overflow: 'hidden',
           fontFamily: settings.fontFamily
         },
         header: {
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           color: 'white',
-          padding: '16px 20px',
+          padding: '10px 12px',
           textAlign: 'center',
-          borderBottom: '1px solid rgba(255,255,255,0.2)'
+          borderBottom: '1px solid rgba(255,255,255,0.2)',
+          flexShrink: 0
         },
         headerTitle: {
-          fontSize: '20px',
+          fontSize: '16px',
           fontWeight: 'bold',
           margin: 0,
-          marginBottom: '6px'
+          marginBottom: '3px'
         },
         headerDescription: {
-          fontSize: '12px',
+          fontSize: '9px',
           margin: 0,
           opacity: 0.95
         },
+        mainContainer: {
+          display: 'flex',
+          flex: 1,
+          overflow: 'hidden',
+          gap: '0px'
+        },
         controlsPanel: {
-          width: '100%',
-          maxHeight: '35vh',
+          width: '50%',
           overflowY: 'auto',
-          borderRight: 'none',
-          borderBottom: '1px solid #ddd',
+          borderRight: '1px solid #ddd',
           background: '#fafafa',
           boxSizing: 'border-box',
-          flexShrink: 0
+          padding: '0',
+          height: '100%',
+          fontSize: '11px'
+        },
+        rightPanel: {
+          width: '50%',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          height: '100%'
         },
         previewPanel: {
-          flex: 1,
-          minHeight: '40vh',
+          flex: '0 0 auto',
+          minHeight: '250px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           background: '#f0f2f5',
-          padding: '16px',
-          overflow: 'auto',
-          boxSizing: 'border-box'
+          padding: '12px',
+          boxSizing: 'border-box',
+          borderBottom: '1px solid #ddd',
+          overflow: 'auto'
         },
         debugPanel: {
-          width: '100%',
-          maxHeight: '30vh',
+          flex: 1,
           overflowY: 'auto',
-          borderLeft: 'none',
-          borderTop: '1px solid #ddd',
-          padding: '16px',
+          padding: '10px',
           background: '#fafafa',
           boxSizing: 'border-box',
-          flexShrink: 0
+          fontSize: '10px'
         }
       };
     } else if (isTablet) {
@@ -157,18 +166,19 @@ function CardBuilder() {
         header: {
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           color: 'white',
-          padding: '16px 24px',
+          padding: '14px 20px',
           textAlign: 'center',
-          borderBottom: '1px solid rgba(255,255,255,0.2)'
+          borderBottom: '1px solid rgba(255,255,255,0.2)',
+          flexShrink: 0
         },
         headerTitle: {
-          fontSize: '24px',
+          fontSize: '20px',
           fontWeight: 'bold',
           margin: 0,
-          marginBottom: '8px'
+          marginBottom: '5px'
         },
         headerDescription: {
-          fontSize: '13px',
+          fontSize: '11px',
           margin: 0,
           opacity: 0.95
         },
@@ -178,34 +188,35 @@ function CardBuilder() {
           overflow: 'hidden'
         },
         controlsPanel: {
-          width: '280px',
+          width: '35%',
           minWidth: '260px',
           overflowY: 'auto',
           borderRight: '1px solid #ddd',
           background: '#fafafa',
           boxSizing: 'border-box',
-          flexShrink: 0
+          flexShrink: 0,
+          fontSize: '12px'
         },
         previewPanel: {
-          flex: 1,
-          minWidth: '250px',
+          flex: '1',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           background: '#f0f2f5',
-          padding: '20px',
+          padding: '16px',
           overflow: 'auto',
           boxSizing: 'border-box'
         },
         debugPanel: {
-          width: '300px',
-          minWidth: '260px',
+          width: '30%',
+          minWidth: '250px',
           overflowY: 'auto',
           borderLeft: '1px solid #ddd',
-          padding: '16px',
+          padding: '14px',
           background: '#fafafa',
           boxSizing: 'border-box',
-          flexShrink: 0
+          flexShrink: 0,
+          fontSize: '11px'
         }
       };
     } else {
@@ -223,13 +234,14 @@ function CardBuilder() {
           color: 'white',
           padding: '20px 32px',
           textAlign: 'center',
-          borderBottom: '1px solid rgba(255,255,255,0.2)'
+          borderBottom: '1px solid rgba(255,255,255,0.2)',
+          flexShrink: 0
         },
         headerTitle: {
           fontSize: '28px',
           fontWeight: 'bold',
           margin: 0,
-          marginBottom: '10px',
+          marginBottom: '8px',
           letterSpacing: '-0.5px'
         },
         headerDescription: {
@@ -253,7 +265,8 @@ function CardBuilder() {
           borderRight: '1px solid #ddd',
           background: '#fafafa',
           boxSizing: 'border-box',
-          flexShrink: 0
+          flexShrink: 0,
+          fontSize: '14px'
         },
         previewPanel: {
           flex: 1,
@@ -274,7 +287,8 @@ function CardBuilder() {
           padding: '20px',
           background: '#fafafa',
           boxSizing: 'border-box',
-          flexShrink: 0
+          flexShrink: 0,
+          fontSize: '13px'
         }
       };
     }
@@ -285,7 +299,6 @@ function CardBuilder() {
   // Handle settings update with validation
   const handleSettingsUpdate = (newSettings) => {
     setSettings(newSettings);
-    // Optional: Save to localStorage for persistence
     if (typeof window !== 'undefined') {
       localStorage.setItem('cardBuilderSettings', JSON.stringify(newSettings));
     }
@@ -304,17 +317,22 @@ function CardBuilder() {
     }
   }, []);
 
-  // Get responsive card dimensions
+  // Get responsive card dimensions and font sizes
   const getResponsiveCardWidth = () => {
     if (isMobile) {
-      return Math.min(settings.cardWidth, windowWidth - 60);
+      return Math.min(settings.cardWidth, windowWidth - 80);
     }
     return settings.cardWidth;
   };
 
+  // Adjust preview font sizes for mobile
   const responsiveSettings = {
     ...settings,
-    cardWidth: getResponsiveCardWidth()
+    cardWidth: getResponsiveCardWidth(),
+    isMobile: isMobile,
+    titleFontSize: isMobile ? '1.2rem' : (isTablet ? '1.5rem' : '1.8rem'),
+    descriptionFontSize: isMobile ? '0.85rem' : (isTablet ? '0.9rem' : '1rem'),
+    buttonFontSize: isMobile ? '0.8rem' : (isTablet ? '0.9rem' : '1rem')
   };
 
   return (
@@ -325,126 +343,215 @@ function CardBuilder() {
           🎨 Card Builder Pro
         </h1>
         <p style={styles.headerDescription}>
-          Design, customize, and preview beautiful cards in real-time • Fully responsive • Live editing
+          Design, customize, and preview beautiful cards in real-time • Live editing
         </p>
       </div>
 
-      {/* Main Content Area */}
-      <div style={styles.mainContent || { display: 'flex', flex: 1, overflow: 'hidden' }}>
-        {/* Left - Controls Panel */}
-        <div style={styles.controlsPanel}>
-          <CardControls 
-            settings={settings} 
-            setSettings={handleSettingsUpdate}
-            isMobile={isMobile}
-          />
-        </div>
-
-        {/* Center - LIVE PREVIEW */}
-        <div style={styles.previewPanel}>
-          <CardContainer settings={responsiveSettings}>
-            <TextElement type="h2" settings={responsiveSettings} />
-            <TextElement type="p" settings={responsiveSettings} />
-            <ButtonPreview settings={responsiveSettings} />
-          </CardContainer>
-        </div>
-
-        {/* Right - Code/Debug Panel */}
-        <div style={styles.debugPanel}>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            marginBottom: '12px',
-            flexWrap: 'wrap',
-            gap: '8px'
-          }}>
-            <h4 style={{ margin: 0, fontSize: isMobile ? '14px' : '16px' }}>
-              📋 Current Settings
-            </h4>
-            <button
-              onClick={() => {
-                const defaultSettings = {
-                  cardWidth: 380,
-                  cardHeight: 320,
-                  cardBackground: '#ffffff',
-                  cardTextColor: '#333333',
-                  cardBorderRadius: 16,
-                  cardShadow: 20,
-                  cardShadowColor: '#000000',
-                  cardPadding: 32,
-                  cardHoverScale: 105,
-                  cardHoverBackground: '#f8f9ff',
-                  fontFamily: 'Arial, sans-serif',
-                  title: "Beautiful Card",
-                  description: "This is an amazing card built with our generator.",
-                  buttonText: "Learn More",
-                  buttonWidth: 160,
-                  buttonHeight: 48,
-                  buttonBackgroundColor: '#0066ff',
-                  buttonTextColor: '#ffffff',
-                  buttonBorderRadius: 8,
-                };
-                handleSettingsUpdate(defaultSettings);
-              }}
-              style={{
-                padding: '6px 12px',
-                fontSize: '12px',
-                background: '#f0f0f0',
-                border: '1px solid #ddd',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => e.target.style.background = '#e0e0e0'}
-              onMouseLeave={(e) => e.target.style.background = '#f0f0f0'}
-            >
-              Reset to Default
-            </button>
+      {/* For mobile: side-by-side layout with scrollable controls */}
+      {isMobile ? (
+        <div style={styles.mainContainer}>
+          {/* Left - Scrollable Controls with smaller fonts */}
+          <div style={styles.controlsPanel}>
+            <CardControls 
+              settings={settings} 
+              setSettings={handleSettingsUpdate}
+              isMobile={isMobile}
+            />
           </div>
-          
-          <pre style={{
-            fontSize: isMobile ? '11px' : '13px',
-            background: '#1e1e1e',
-            color: '#d4d4d4',
-            padding: '12px',
-            borderRadius: '8px',
-            border: '1px solid #333',
-            maxHeight: isMobile ? 'calc(30vh - 80px)' : 'calc(75vh - 100px)',
-            overflow: 'auto',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            fontFamily: 'monospace'
-          }}>
-            {JSON.stringify(settings, null, 2)}
-          </pre>
-          
-          {isMobile && (
+
+          {/* Right - Preview and Debug */}
+          <div style={styles.rightPanel}>
+            {/* Preview Section - Always visible with adjusted font sizes */}
+            <div style={styles.previewPanel}>
+              <CardContainer settings={responsiveSettings}>
+                <TextElement type="h2" settings={responsiveSettings} />
+                <TextElement type="p" settings={responsiveSettings} />
+                <ButtonPreview settings={responsiveSettings} />
+              </CardContainer>
+            </div>
+
+            {/* Debug Section - Scrollable with smaller fonts */}
+            <div style={styles.debugPanel}>
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                marginBottom: '8px',
+                flexWrap: 'wrap',
+                gap: '6px'
+              }}>
+                <h4 style={{ margin: 0, fontSize: '10px', fontWeight: 'bold' }}>
+                  📋 Settings JSON
+                </h4>
+                <button
+                  onClick={() => {
+                    const defaultSettings = {
+                      cardWidth: 380,
+                      cardHeight: 320,
+                      cardBackground: '#ffffff',
+                      cardTextColor: '#333333',
+                      cardBorderRadius: 16,
+                      cardShadow: 20,
+                      cardShadowColor: '#000000',
+                      cardPadding: 32,
+                      cardHoverScale: 105,
+                      cardHoverBackground: '#f8f9ff',
+                      fontFamily: 'Arial, sans-serif',
+                      title: "Beautiful Card",
+                      description: "This is an amazing card built with our generator.",
+                      buttonText: "Learn More",
+                      buttonWidth: 160,
+                      buttonHeight: 48,
+                      buttonBackgroundColor: '#0066ff',
+                      buttonTextColor: '#ffffff',
+                      buttonBorderRadius: 8,
+                    };
+                    handleSettingsUpdate(defaultSettings);
+                  }}
+                  style={{
+                    padding: '3px 8px',
+                    fontSize: '9px',
+                    background: '#f0f0f0',
+                    border: '1px solid #ddd',
+                    borderRadius: '6px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Reset
+                </button>
+              </div>
+              
+              <pre style={{
+                fontSize: '8px',
+                background: '#1e1e1e',
+                color: '#d4d4d4',
+                padding: '8px',
+                borderRadius: '6px',
+                border: '1px solid #333',
+                maxHeight: 'calc(100% - 70px)',
+                overflow: 'auto',
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+                fontFamily: 'monospace'
+              }}>
+                {JSON.stringify(settings, null, 2)}
+              </pre>
+              
+              <div style={{
+                marginTop: '8px',
+                padding: '5px',
+                background: '#e3f2fd',
+                borderRadius: '6px',
+                fontSize: '8px',
+                textAlign: 'center',
+                color: '#1976d2'
+              }}>
+                💡 Scroll controls on left • Preview stays visible
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* For tablet and desktop: three-column layout */
+        <div style={styles.mainContent}>
+          {/* Left - Controls Panel */}
+          <div style={styles.controlsPanel}>
+            <CardControls 
+              settings={settings} 
+              setSettings={handleSettingsUpdate}
+              isMobile={isMobile}
+            />
+          </div>
+
+          {/* Center - LIVE PREVIEW */}
+          <div style={styles.previewPanel}>
+            <CardContainer settings={responsiveSettings}>
+              <TextElement type="h2" settings={responsiveSettings} />
+              <TextElement type="p" settings={responsiveSettings} />
+              <ButtonPreview settings={responsiveSettings} />
+            </CardContainer>
+          </div>
+
+          {/* Right - Code/Debug Panel */}
+          <div style={styles.debugPanel}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              marginBottom: '12px',
+              flexWrap: 'wrap',
+              gap: '8px'
+            }}>
+              <h4 style={{ margin: 0, fontSize: isTablet ? '13px' : '16px' }}>
+                📋 Current Settings
+              </h4>
+              <button
+                onClick={() => {
+                  const defaultSettings = {
+                    cardWidth: 380,
+                    cardHeight: 320,
+                    cardBackground: '#ffffff',
+                    cardTextColor: '#333333',
+                    cardBorderRadius: 16,
+                    cardShadow: 20,
+                    cardShadowColor: '#000000',
+                    cardPadding: 32,
+                    cardHoverScale: 105,
+                    cardHoverBackground: '#f8f9ff',
+                    fontFamily: 'Arial, sans-serif',
+                    title: "Beautiful Card",
+                    description: "This is an amazing card built with our generator.",
+                    buttonText: "Learn More",
+                    buttonWidth: 160,
+                    buttonHeight: 48,
+                    buttonBackgroundColor: '#0066ff',
+                    buttonTextColor: '#ffffff',
+                    buttonBorderRadius: 8,
+                  };
+                  handleSettingsUpdate(defaultSettings);
+                }}
+                style={{
+                  padding: isTablet ? '4px 10px' : '6px 12px',
+                  fontSize: isTablet ? '11px' : '12px',
+                  background: '#f0f0f0',
+                  border: '1px solid #ddd',
+                  borderRadius: '6px',
+                  cursor: 'pointer'
+                }}
+              >
+                Reset to Default
+              </button>
+            </div>
+            
+            <pre style={{
+              fontSize: isTablet ? '11px' : '13px',
+              background: '#1e1e1e',
+              color: '#d4d4d4',
+              padding: isTablet ? '10px' : '12px',
+              borderRadius: '8px',
+              border: '1px solid #333',
+              maxHeight: 'calc(100% - 100px)',
+              overflow: 'auto',
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              fontFamily: 'monospace'
+            }}>
+              {JSON.stringify(settings, null, 2)}
+            </pre>
+            
             <div style={{
               marginTop: '12px',
-              padding: '8px',
-              background: '#e3f2fd',
-              borderRadius: '6px',
-              fontSize: '11px',
+              fontSize: isTablet ? '10px' : '11px',
+              color: '#666',
               textAlign: 'center',
-              color: '#1976d2'
+              borderTop: '1px solid #eee',
+              paddingTop: '12px'
             }}>
-              💡 Tip: Rotate device or resize for better experience
+              🎨 Live preview updates in real-time
             </div>
-          )}
-          
-          <div style={{
-            marginTop: '12px',
-            fontSize: '11px',
-            color: '#666',
-            textAlign: 'center',
-            borderTop: '1px solid #eee',
-            paddingTop: '12px'
-          }}>
-            🎨 Live preview updates in real-time
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
