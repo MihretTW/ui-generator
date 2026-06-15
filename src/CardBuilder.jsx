@@ -33,6 +33,30 @@ function CardBuilder() {
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const [isTablet, setIsTablet] = useState(typeof window !== 'undefined' ? (window.innerWidth > 768 && window.innerWidth <= 1024) : false);
 
+  // Update document title and meta description
+  useEffect(() => {
+    // Set website title
+    document.title = "🎨 Card Builder Pro - Create Beautiful Cards Instantly";
+    
+    // Create or update meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.name = "description";
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.content = "Design and customize beautiful cards in real-time with our interactive card builder. Live preview, responsive design, and easy-to-use controls.";
+    
+    // Add viewport meta if not exists (for better mobile responsiveness)
+    let viewport = document.querySelector('meta[name="viewport"]');
+    if (!viewport) {
+      viewport = document.createElement('meta');
+      viewport.name = "viewport";
+      viewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes";
+      document.head.appendChild(viewport);
+    }
+  }, []);
+
   // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
@@ -69,9 +93,27 @@ function CardBuilder() {
           overflow: 'auto',
           fontFamily: settings.fontFamily
         },
+        header: {
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          color: 'white',
+          padding: '16px 20px',
+          textAlign: 'center',
+          borderBottom: '1px solid rgba(255,255,255,0.2)'
+        },
+        headerTitle: {
+          fontSize: '20px',
+          fontWeight: 'bold',
+          margin: 0,
+          marginBottom: '6px'
+        },
+        headerDescription: {
+          fontSize: '12px',
+          margin: 0,
+          opacity: 0.95
+        },
         controlsPanel: {
           width: '100%',
-          maxHeight: '40vh',
+          maxHeight: '35vh',
           overflowY: 'auto',
           borderRight: 'none',
           borderBottom: '1px solid #ddd',
@@ -92,7 +134,7 @@ function CardBuilder() {
         },
         debugPanel: {
           width: '100%',
-          maxHeight: '35vh',
+          maxHeight: '30vh',
           overflowY: 'auto',
           borderLeft: 'none',
           borderTop: '1px solid #ddd',
@@ -106,10 +148,34 @@ function CardBuilder() {
       return {
         container: {
           display: 'flex',
+          flexDirection: 'column',
           height: '100vh',
           width: '100%',
           overflow: 'hidden',
           fontFamily: settings.fontFamily
+        },
+        header: {
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          color: 'white',
+          padding: '16px 24px',
+          textAlign: 'center',
+          borderBottom: '1px solid rgba(255,255,255,0.2)'
+        },
+        headerTitle: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          margin: 0,
+          marginBottom: '8px'
+        },
+        headerDescription: {
+          fontSize: '13px',
+          margin: 0,
+          opacity: 0.95
+        },
+        mainContent: {
+          display: 'flex',
+          flex: 1,
+          overflow: 'hidden'
         },
         controlsPanel: {
           width: '280px',
@@ -146,10 +212,38 @@ function CardBuilder() {
       return {
         container: {
           display: 'flex',
+          flexDirection: 'column',
           height: '100vh',
           width: '100%',
           overflow: 'hidden',
           fontFamily: settings.fontFamily
+        },
+        header: {
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          color: 'white',
+          padding: '20px 32px',
+          textAlign: 'center',
+          borderBottom: '1px solid rgba(255,255,255,0.2)'
+        },
+        headerTitle: {
+          fontSize: '28px',
+          fontWeight: 'bold',
+          margin: 0,
+          marginBottom: '10px',
+          letterSpacing: '-0.5px'
+        },
+        headerDescription: {
+          fontSize: '14px',
+          margin: 0,
+          opacity: 0.95,
+          maxWidth: '600px',
+          marginLeft: 'auto',
+          marginRight: 'auto'
+        },
+        mainContent: {
+          display: 'flex',
+          flex: 1,
+          overflow: 'hidden'
         },
         controlsPanel: {
           width: '320px',
@@ -225,117 +319,130 @@ function CardBuilder() {
 
   return (
     <div style={styles.container}>
-      {/* Left - Controls Panel */}
-      <div style={styles.controlsPanel}>
-        <CardControls 
-          settings={settings} 
-          setSettings={handleSettingsUpdate}
-          isMobile={isMobile}
-        />
+      {/* Website Header with Title and Description */}
+      <div style={styles.header}>
+        <h1 style={styles.headerTitle}>
+          🎨 Card Builder Pro
+        </h1>
+        <p style={styles.headerDescription}>
+          Design, customize, and preview beautiful cards in real-time • Fully responsive • Live editing
+        </p>
       </div>
 
-      {/* Center - LIVE PREVIEW */}
-      <div style={styles.previewPanel}>
-        <CardContainer settings={responsiveSettings}>
-          <TextElement type="h2" settings={responsiveSettings} />
-          <TextElement type="p" settings={responsiveSettings} />
-          <ButtonPreview settings={responsiveSettings} />
-        </CardContainer>
-      </div>
-
-      {/* Right - Code/Debug Panel */}
-      <div style={styles.debugPanel}>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: '12px',
-          flexWrap: 'wrap',
-          gap: '8px'
-        }}>
-          <h4 style={{ margin: 0, fontSize: isMobile ? '14px' : '16px' }}>
-            📋 Current Settings
-          </h4>
-          <button
-            onClick={() => {
-              const defaultSettings = {
-                cardWidth: 380,
-                cardHeight: 320,
-                cardBackground: '#ffffff',
-                cardTextColor: '#333333',
-                cardBorderRadius: 16,
-                cardShadow: 20,
-                cardShadowColor: '#000000',
-                cardPadding: 32,
-                cardHoverScale: 105,
-                cardHoverBackground: '#f8f9ff',
-                fontFamily: 'Arial, sans-serif',
-                title: "Beautiful Card",
-                description: "This is an amazing card built with our generator.",
-                buttonText: "Learn More",
-                buttonWidth: 160,
-                buttonHeight: 48,
-                buttonBackgroundColor: '#0066ff',
-                buttonTextColor: '#ffffff',
-                buttonBorderRadius: 8,
-              };
-              handleSettingsUpdate(defaultSettings);
-            }}
-            style={{
-              padding: '6px 12px',
-              fontSize: '12px',
-              background: '#f0f0f0',
-              border: '1px solid #ddd',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={(e) => e.target.style.background = '#e0e0e0'}
-            onMouseLeave={(e) => e.target.style.background = '#f0f0f0'}
-          >
-            Reset to Default
-          </button>
+      {/* Main Content Area */}
+      <div style={styles.mainContent || { display: 'flex', flex: 1, overflow: 'hidden' }}>
+        {/* Left - Controls Panel */}
+        <div style={styles.controlsPanel}>
+          <CardControls 
+            settings={settings} 
+            setSettings={handleSettingsUpdate}
+            isMobile={isMobile}
+          />
         </div>
-        
-        <pre style={{
-          fontSize: isMobile ? '11px' : '13px',
-          background: '#1e1e1e',
-          color: '#d4d4d4',
-          padding: '12px',
-          borderRadius: '8px',
-          border: '1px solid #333',
-          maxHeight: isMobile ? 'calc(35vh - 80px)' : 'calc(75vh - 80px)',
-          overflow: 'auto',
-          whiteSpace: 'pre-wrap',
-          wordBreak: 'break-word',
-          fontFamily: 'monospace'
-        }}>
-          {JSON.stringify(settings, null, 2)}
-        </pre>
-        
-        {isMobile && (
+
+        {/* Center - LIVE PREVIEW */}
+        <div style={styles.previewPanel}>
+          <CardContainer settings={responsiveSettings}>
+            <TextElement type="h2" settings={responsiveSettings} />
+            <TextElement type="p" settings={responsiveSettings} />
+            <ButtonPreview settings={responsiveSettings} />
+          </CardContainer>
+        </div>
+
+        {/* Right - Code/Debug Panel */}
+        <div style={styles.debugPanel}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            marginBottom: '12px',
+            flexWrap: 'wrap',
+            gap: '8px'
+          }}>
+            <h4 style={{ margin: 0, fontSize: isMobile ? '14px' : '16px' }}>
+              📋 Current Settings
+            </h4>
+            <button
+              onClick={() => {
+                const defaultSettings = {
+                  cardWidth: 380,
+                  cardHeight: 320,
+                  cardBackground: '#ffffff',
+                  cardTextColor: '#333333',
+                  cardBorderRadius: 16,
+                  cardShadow: 20,
+                  cardShadowColor: '#000000',
+                  cardPadding: 32,
+                  cardHoverScale: 105,
+                  cardHoverBackground: '#f8f9ff',
+                  fontFamily: 'Arial, sans-serif',
+                  title: "Beautiful Card",
+                  description: "This is an amazing card built with our generator.",
+                  buttonText: "Learn More",
+                  buttonWidth: 160,
+                  buttonHeight: 48,
+                  buttonBackgroundColor: '#0066ff',
+                  buttonTextColor: '#ffffff',
+                  buttonBorderRadius: 8,
+                };
+                handleSettingsUpdate(defaultSettings);
+              }}
+              style={{
+                padding: '6px 12px',
+                fontSize: '12px',
+                background: '#f0f0f0',
+                border: '1px solid #ddd',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => e.target.style.background = '#e0e0e0'}
+              onMouseLeave={(e) => e.target.style.background = '#f0f0f0'}
+            >
+              Reset to Default
+            </button>
+          </div>
+          
+          <pre style={{
+            fontSize: isMobile ? '11px' : '13px',
+            background: '#1e1e1e',
+            color: '#d4d4d4',
+            padding: '12px',
+            borderRadius: '8px',
+            border: '1px solid #333',
+            maxHeight: isMobile ? 'calc(30vh - 80px)' : 'calc(75vh - 100px)',
+            overflow: 'auto',
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            fontFamily: 'monospace'
+          }}>
+            {JSON.stringify(settings, null, 2)}
+          </pre>
+          
+          {isMobile && (
+            <div style={{
+              marginTop: '12px',
+              padding: '8px',
+              background: '#e3f2fd',
+              borderRadius: '6px',
+              fontSize: '11px',
+              textAlign: 'center',
+              color: '#1976d2'
+            }}>
+              💡 Tip: Rotate device or resize for better experience
+            </div>
+          )}
+          
           <div style={{
             marginTop: '12px',
-            padding: '8px',
-            background: '#e3f2fd',
-            borderRadius: '6px',
             fontSize: '11px',
+            color: '#666',
             textAlign: 'center',
-            color: '#1976d2'
+            borderTop: '1px solid #eee',
+            paddingTop: '12px'
           }}>
-            💡 Tip: Rotate device or resize for better experience
+            🎨 Live preview updates in real-time
           </div>
-        )}
-        
-        <div style={{
-          marginTop: '12px',
-          fontSize: '11px',
-          color: '#666',
-          textAlign: 'center',
-          borderTop: '1px solid #eee',
-          paddingTop: '12px'
-        }}>
-          🎨 Live preview updates in real-time
         </div>
       </div>
     </div>
